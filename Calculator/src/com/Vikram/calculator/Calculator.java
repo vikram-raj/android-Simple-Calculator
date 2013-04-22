@@ -9,7 +9,9 @@ import android.widget.EditText;
 public class Calculator extends Activity {
 	
 	EditText result;
-	int i, num, temp;
+	int i;
+	double temp;
+	double num;
 	public String str =""; 
 	Character operation = 'o'; 
 	@Override
@@ -18,7 +20,7 @@ public class Calculator extends Activity {
 		setContentView(R.layout.activity_calculator);
 		result = (EditText)findViewById(R.id.result);
 	}
-
+						
 	private void insert(int j) {
 		str = str+Integer.toString(j);
 		num = Integer.valueOf(str).intValue();
@@ -32,14 +34,15 @@ public class Calculator extends Activity {
 		else if(operation == '-')
 			num = temp - num;
 		else if(operation == '/') {
-			if(num == '0')
-				result.setText("Division by zero is undefined");
-			else
 				num = temp/num;
 		}
 		
 		else if(operation == '*')
 			num = temp * num;
+		
+		else if(operation == '^')
+			num = Math.pow(temp, num);
+		
 		result.setText("" +num);
 	}
 
@@ -114,6 +117,16 @@ public class Calculator extends Activity {
 	public void btnmultiClick(View v){
 		prfrm();
 		operation = '*';
+	}
+	
+	public void btnsqrtClick(View v){
+		num = Math.sqrt(num);
+		result.setText("" +num);
+	}
+	
+	public void btnsqrClick(View v){
+		prfrm();
+		operation = '^';
 	}
 	
 	public void btnequalClick(View v){
